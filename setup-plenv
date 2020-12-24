@@ -1,0 +1,41 @@
+
+# doas perl -ani -E '$F[3] .= ",softdep,noatime" if $F[1] =~ m{/home|/minicpan|/tmp}; say "@F"' /etc/fstab 
+
+# TODO:
+# * Install plenv "system-wide" instead of per-user
+
+doas pkg_add git bash
+
+git clone https://github.com/tokuhirom/plenv.git      ~/.plenv
+git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
+git clone git://github.com/miyagawa/plenv-contrib.git ~/.plenv/plugins/plenv-contrib/
+
+# If we need plenv exec-all --match, we need instead:
+#git clone https://github.com/afresh1/plenv-contrib.git ~/.plenv/plugins/plenv-contrib/
+#( cd ~/.plenv/plugins/plenv-contrib && git checkout exec-match )
+
+mkdir -p ~/.plenv/libexec ~/.plenv/plenv.d/exec
+
+for f in \
+    plenv/libexec/plenv-install-latest \
+    plenv/libexec/plenv-install-extra-modules \
+    plenv/plenv.d/exec/carton_path.bash \
+; do
+    ftp -o ~/.$f https://raw.githubusercontent.com/afresh1/dotfiles/blead/$f
+    chmod +x ~/.$f
+done
+
+# TODO: add the actual smoker required modules
+cat <<EOL >~/.plenv/extra-modules
+Carton
+EOL
+
+PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
+
+plenv install-latest
+
+cat <<'EOL' >> ~/.profile
+PATH="$HOME/.plenv/bin:$PATH"
+eval "$(plenv init -)"
+EOL

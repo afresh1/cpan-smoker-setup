@@ -1,0 +1,5 @@
+The CPAN Testers project captures and analyzes detailed results from
+building and testing CPAN distributions on multiple operating systems
+and multiple versions of Perl. This provides valuable feedback to module
+authors and potential users to identify bugs or platform compatibility
+issues and improves the overall quality and value of CPAN.

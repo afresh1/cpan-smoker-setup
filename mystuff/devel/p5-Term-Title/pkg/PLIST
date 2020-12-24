@@ -1,0 +1,4 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/Term/
+${P5SITE}/Term/Title.pm
+@man man/man3p/Term::Title.3p

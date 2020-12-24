@@ -1,0 +1,5 @@
+Term::Title provides an abstraction for setting the titlebar or the tab
+title across different types of terminals. For *nix terminals, it prints
+the appropriate escape sequences to set the terminal or tab title based
+on the value of $ENV{TERM}. On Windows, it uses Win32::Console to set
+the title directly.

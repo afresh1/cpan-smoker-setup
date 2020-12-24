@@ -1,0 +1,2 @@
+Metabase::Client::Simple provides is extremely simple, lightweight
+library for submitting facts to a Metabase web server.

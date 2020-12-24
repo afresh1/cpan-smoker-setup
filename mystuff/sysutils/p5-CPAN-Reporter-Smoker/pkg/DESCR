@@ -1,0 +1,3 @@
+Rudimentary smoke tester for CPAN Testers, built upon CPAN::Reporter.
+Use at your own risk. It requires a recent version of CPAN::Reporter to
+run.

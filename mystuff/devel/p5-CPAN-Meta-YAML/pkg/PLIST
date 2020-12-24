@@ -1,0 +1,5 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/CPAN/
+${P5SITE}/CPAN/Meta/
+${P5SITE}/CPAN/Meta/YAML.pm
+@man man/man3p/CPAN::Meta::YAML.3p

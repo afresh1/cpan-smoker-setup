@@ -1,0 +1,9 @@
+@comment $OpenBSD: PLIST,v$
+bin/minicpan
+${P5SITE}/CPAN/
+${P5SITE}/CPAN/Mini/
+${P5SITE}/CPAN/Mini.pm
+${P5SITE}/CPAN/Mini/App.pm
+@man man/man1/minicpan.1
+@man man/man3p/CPAN::Mini.3p
+@man man/man3p/CPAN::Mini::App.3p

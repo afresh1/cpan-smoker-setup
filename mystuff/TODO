@@ -1,0 +1,17 @@
+www/p5-Mozilla-CA
+devel/p5-CPAN-Meta-YAML
+devel/p5-Term-Title
+devel/p5-CPAN-DistnameInfo
+devel/p5-Devel-Autoflush
+security/p5-Net-SSLeay
+security/p5-IO-Socket-SSL
+sysutils/p5-CPAN-SQLite
+devel/p5-Metabase-Fact
+devel/p5-CPAN-Testers-Report
+devel/p5-Metabase-Client-Simple
+devel/p5-Test-Reporter-Transport-Metabase
+devel/p5-Git-Raw
+sysutils/p5-CPAN-Reporter
+sysutils/p5-CPAN-Mini
+devel/p5-CPAN-Checksums
+sysutils/p5-CPAN-Reporter-Smoker

@@ -1,0 +1,4 @@
+Metabase is a framework for associating content and metadata with
+arbitrary resources. A Metabase can be used to store test reports,
+reviews, coverage analysis reports, reports on static analysis of coding
+style, or anything else for which datatypes are constructed.

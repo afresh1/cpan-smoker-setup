@@ -1,0 +1,6 @@
+$success = updatedir($dir)
+"updatedir()" takes a directory name as argument and writes a typical
+"CHECKSUMS" file in that directory as used on CPAN unless a previously
+written "CHECKSUMS" file is there that is still valid. Returns 2 if a
+new "CHECKSUMS" file has been written, 1 if a valid "CHECKSUMS" file
+is already there, otherwise dies.

@@ -1,0 +1,42 @@
+@comment $OpenBSD: PLIST,v$
+bin/metabase-profile
+${P5SITE}/Metabase/
+${P5SITE}/Metabase/Fact/
+${P5SITE}/Metabase/Fact.pm
+${P5SITE}/Metabase/Fact/Hash.pm
+${P5SITE}/Metabase/Fact/String.pm
+${P5SITE}/Metabase/Report.pm
+${P5SITE}/Metabase/Resource/
+${P5SITE}/Metabase/Resource.pm
+${P5SITE}/Metabase/Resource/cpan/
+${P5SITE}/Metabase/Resource/cpan.pm
+${P5SITE}/Metabase/Resource/cpan/distfile.pm
+${P5SITE}/Metabase/Resource/metabase/
+${P5SITE}/Metabase/Resource/metabase.pm
+${P5SITE}/Metabase/Resource/metabase/fact.pm
+${P5SITE}/Metabase/Resource/metabase/user.pm
+${P5SITE}/Metabase/Resource/perl/
+${P5SITE}/Metabase/Resource/perl.pm
+${P5SITE}/Metabase/Resource/perl/commit.pm
+${P5SITE}/Metabase/User/
+${P5SITE}/Metabase/User/EmailAddress.pm
+${P5SITE}/Metabase/User/FullName.pm
+${P5SITE}/Metabase/User/Profile.pm
+${P5SITE}/Metabase/User/Secret.pm
+@man man/man1/metabase-profile.1
+@man man/man3p/Metabase::Fact.3p
+@man man/man3p/Metabase::Fact::Hash.3p
+@man man/man3p/Metabase::Fact::String.3p
+@man man/man3p/Metabase::Report.3p
+@man man/man3p/Metabase::Resource.3p
+@man man/man3p/Metabase::Resource::cpan.3p
+@man man/man3p/Metabase::Resource::cpan::distfile.3p
+@man man/man3p/Metabase::Resource::metabase.3p
+@man man/man3p/Metabase::Resource::metabase::fact.3p
+@man man/man3p/Metabase::Resource::metabase::user.3p
+@man man/man3p/Metabase::Resource::perl.3p
+@man man/man3p/Metabase::Resource::perl::commit.3p
+@man man/man3p/Metabase::User::EmailAddress.3p
+@man man/man3p/Metabase::User::FullName.3p
+@man man/man3p/Metabase::User::Profile.3p
+@man man/man3p/Metabase::User::Secret.3p

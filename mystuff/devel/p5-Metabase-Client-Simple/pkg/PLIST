@@ -1,0 +1,5 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/Metabase/
+${P5SITE}/Metabase/Client/
+${P5SITE}/Metabase/Client/Simple.pm
+@man man/man3p/Metabase::Client::Simple.3p

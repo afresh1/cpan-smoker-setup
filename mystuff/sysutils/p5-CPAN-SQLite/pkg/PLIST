@@ -1,0 +1,27 @@
+@comment $OpenBSD: PLIST,v$
+bin/cpandb
+${P5SITE}/CPAN/SQLite/
+${P5SITE}/CPAN/SQLite.pm
+${P5SITE}/CPAN/SQLite/DBI/
+${P5SITE}/CPAN/SQLite/DBI.pm
+${P5SITE}/CPAN/SQLite/DBI/Index.pm
+${P5SITE}/CPAN/SQLite/DBI/Search.pm
+${P5SITE}/CPAN/SQLite/Index.pm
+${P5SITE}/CPAN/SQLite/Info.pm
+${P5SITE}/CPAN/SQLite/META.pm
+${P5SITE}/CPAN/SQLite/Populate.pm
+${P5SITE}/CPAN/SQLite/Search.pm
+${P5SITE}/CPAN/SQLite/State.pm
+${P5SITE}/CPAN/SQLite/Util.pm
+@man man/man1/cpandb.1
+@man man/man3p/CPAN::SQLite.3p
+@man man/man3p/CPAN::SQLite::DBI.3p
+@man man/man3p/CPAN::SQLite::DBI::Index.3p
+@man man/man3p/CPAN::SQLite::DBI::Search.3p
+@man man/man3p/CPAN::SQLite::Index.3p
+@man man/man3p/CPAN::SQLite::Info.3p
+@man man/man3p/CPAN::SQLite::META.3p
+@man man/man3p/CPAN::SQLite::Populate.3p
+@man man/man3p/CPAN::SQLite::Search.3p
+@man man/man3p/CPAN::SQLite::State.3p
+@man man/man3p/CPAN::SQLite::Util.3p

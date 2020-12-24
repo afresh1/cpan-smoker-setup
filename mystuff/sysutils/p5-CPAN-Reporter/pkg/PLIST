@@ -1,0 +1,15 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/CPAN/
+${P5SITE}/CPAN/Reporter/
+${P5SITE}/CPAN/Reporter.pm
+${P5SITE}/CPAN/Reporter/API.pm
+${P5SITE}/CPAN/Reporter/Config.pm
+${P5SITE}/CPAN/Reporter/FAQ.pm
+${P5SITE}/CPAN/Reporter/History.pm
+${P5SITE}/CPAN/Reporter/PrereqCheck.pm
+@man man/man3p/CPAN::Reporter.3p
+@man man/man3p/CPAN::Reporter::API.3p
+@man man/man3p/CPAN::Reporter::Config.3p
+@man man/man3p/CPAN::Reporter::FAQ.3p
+@man man/man3p/CPAN::Reporter::History.3p
+@man man/man3p/CPAN::Reporter::PrereqCheck.3p

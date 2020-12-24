@@ -1,0 +1,2 @@
+This module submits a Test::Reporter report to the specified Metabase
+instance.

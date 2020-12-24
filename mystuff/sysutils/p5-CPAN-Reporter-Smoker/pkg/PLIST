@@ -1,0 +1,3 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/CPAN/Reporter/Smoker.pm
+@man man/man3p/CPAN::Reporter::Smoker.3p

@@ -1,0 +1,21 @@
+@comment $OpenBSD: PLIST,v$
+${P5SITE}/CPAN/Testers/
+${P5SITE}/CPAN/Testers/Fact/
+${P5SITE}/CPAN/Testers/Fact/InstalledModules.pm
+${P5SITE}/CPAN/Testers/Fact/LegacyReport.pm
+${P5SITE}/CPAN/Testers/Fact/PerlConfig.pm
+${P5SITE}/CPAN/Testers/Fact/Prereqs.pm
+${P5SITE}/CPAN/Testers/Fact/TestEnvironment.pm
+${P5SITE}/CPAN/Testers/Fact/TestOutput.pm
+${P5SITE}/CPAN/Testers/Fact/TestSummary.pm
+${P5SITE}/CPAN/Testers/Fact/TesterComment.pm
+${P5SITE}/CPAN/Testers/Report.pm
+@man man/man3p/CPAN::Testers::Fact::InstalledModules.3p
+@man man/man3p/CPAN::Testers::Fact::LegacyReport.3p
+@man man/man3p/CPAN::Testers::Fact::PerlConfig.3p
+@man man/man3p/CPAN::Testers::Fact::Prereqs.3p
+@man man/man3p/CPAN::Testers::Fact::TestEnvironment.3p
+@man man/man3p/CPAN::Testers::Fact::TestOutput.3p
+@man man/man3p/CPAN::Testers::Fact::TestSummary.3p
+@man man/man3p/CPAN::Testers::Fact::TesterComment.3p
+@man man/man3p/CPAN::Testers::Report.3p

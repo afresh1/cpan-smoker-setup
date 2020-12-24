@@ -1,0 +1,23 @@
+
+
+p5-Module-Signature-0.87 module signature file manipulation
+p5-Log-Log4perl-1.50 Log4j implementation for Perl
+p5-Test-Reporter-1.62p0v0 sends test results to cpan-testers@perl.org
+p5-HTTP-Date-6.02p0 date conversion routines
+p5-YAML-1.26p0      YAML Ain't Markup Language
+p5-local-lib-2.000024p1 create and use a local lib/ for perl modules with PERL5LIB
+p5-Module-Build-0.4224p0 build and install Perl modules
+p5-Module-Build-Tiny-0.039p0 tiny replacement for Module::Build
+p5-LWP-Protocol-https
+
+p5-CPAN-Meta-YAML
+p5-CPAN-Reporter
+p5-IO-Socket-SSL
+p5-Mozilla-CA
+p5-Net-SSLeay
+p5-Test-Reporter-Transport-Metabase
+
+curl-7.72.0p0       transfer files with FTP, HTTP, HTTPS, etc.
+gnupg-1.4.23p4      GNU privacy guard - a free PGP replacement
+unzip-6.0p13        extract, list & test files in a ZIP archive
+bzip2-1.0.8         block-sorting file compressor, unencumbered

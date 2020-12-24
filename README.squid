@@ -1,0 +1,8 @@
+doas pkg_add squid
+
+Add to /etc/suid/squid.conf (and remove other allowed nets as appropriate)
+acl localnet src 127.0.0.1              # localhost
+cache_dir ufs /var/squid/cache 10000 16 256
+
+refresh_pattern -i /[0-9][0-0][a-z\.]+\.([gx]?z|t[bg]z|bz2|zip)$	0	80%	90
+refresh_pattern -i                    \.([gx]?z|t[bg]z|bz2|zip)$	0	80%	129600

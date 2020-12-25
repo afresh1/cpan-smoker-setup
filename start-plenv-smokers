@@ -1,0 +1,24 @@
+#!/bin/sh
+session_name=cpan-smoker
+
+plenv_versions=$( plenv versions --bare )
+if [ ! "$plenv_versions" ]; then
+	echo "No plenv versions found" >&2
+	exit 2
+fi
+
+[ "$(tmux list-sessions -f "#{==:#S,$session_name}")" ] \
+    || tmux new-session -d -s $session_name
+
+started=""
+for v in $plenv_versions; do
+	[ "$(tmux list-windows -t $session_name -f "#{==:#W,$v}" )" ] \
+	    && continue
+
+	started="$started $v"
+	tmux new-window -t $session_name -n $v -e "PLENV_VERSION=$v" -d \
+	    "perl -MCPAN::Reporter::Smoker -e '\$0=q{Smoking CPAN v$v};start'"
+done
+
+[ "$started" ] && tmux send-keys -t $session_name:0 \
+    "echo \$(date) started $started" C-M

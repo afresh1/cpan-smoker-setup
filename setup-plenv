@@ -58,7 +58,21 @@ EOL
 PATH="$HOME/.plenv/bin:$PATH"
 eval "$(plenv init -)"
 
-plenv install-latest
+# To start, I only want to test semi-recent perls
+plenv install-latest -o 5.24
+
+# We only want a max of three threded perls
+# so we trust the "full" list of non-threaded to be more complete
+oldest=$( plenv versions --bare | grep -x '5\.[0-9][0-9]' | tail -3 | head -1 )
+plenv install-latest -o $oldest -s -threaded -- -Dusethreaded
+
+# Now we remove threaded versions that are older than we want
+tempfile=$( mktemp threaded-perls-XXXXXXXX )
+plenv versions --bare | grep '-threaded$' | tail -3 > $tmpfile
+for v in plenv versions | grep -v -x -F -f $tempfile; do
+	rm -rf "$(plenv root)/versions/$v"
+done
+rm -f $tempfile
 
 cat <<'EOL' >> ~/.profile
 PATH="$HOME/.plenv/bin:$PATH"

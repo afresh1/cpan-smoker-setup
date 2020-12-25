@@ -18,7 +18,6 @@ mkdir -p ~/.plenv/libexec ~/.plenv/plenv.d/exec
 
 for f in \
     plenv/libexec/plenv-install-latest \
-    plenv/libexec/plenv-install-extra-modules \
     plenv/plenv.d/exec/carton_path.bash \
 ; do
     ftp -o ~/.$f https://raw.githubusercontent.com/afresh1/dotfiles/blead/$f

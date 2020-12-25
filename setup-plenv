@@ -1,14 +1,26 @@
-
+#!/bin/sh
 # doas perl -ani -E '$F[3] .= ",softdep,noatime" if $F[1] =~ m{/home|/minicpan|/tmp}; say "@F"' /etc/fstab
 
 # TODO:
 # * Install plenv "system-wide" instead of per-user
 
-doas pkg_add git bash
+doas -n pkg_add git bash
 
-git clone https://github.com/tokuhirom/plenv.git      ~/.plenv
-git clone https://github.com/tokuhirom/Perl-Build.git ~/.plenv/plugins/perl-build/
-git clone git://github.com/miyagawa/plenv-contrib.git ~/.plenv/plugins/plenv-contrib/
+# Ignore erros in the `doas` above, they have probably already run
+set -e
+
+set -x
+while read src dst; do
+    if [ -e ~/$dst/.git ]; then
+        ( cd ~/$dst && git pull )
+    else
+        git clone $src ~/$dst
+    fi
+done <<EOL
+https://github.com/tokuhirom/plenv.git        .plenv
+https://github.com/tokuhirom/Perl-Build.git   .plenv/plugins/perl-build
+https://github.com/miyagawa/plenv-contrib.git .plenv/plugins/plenv-contrib
+EOL
 
 # If we need plenv exec-all --match, we need instead:
 #git clone https://github.com/afresh1/plenv-contrib.git ~/.plenv/plugins/plenv-contrib/

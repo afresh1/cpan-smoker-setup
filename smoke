@@ -1,0 +1,79 @@
+#!/usr/bin/env perl
+use strict;
+
+use Sys::Syslog qw< :standard :macros >;;
+
+my $name = "Smoke CPAN on $^V";
+$name .= " ($ENV{PLENV_VERSION})" if $ENV{PLENV_VERSION};
+
+BEGIN {
+	use CPAN::HandleConfig;
+
+	sub set_syslog_colorize {
+		$CPAN::Config->{colorize_print} = LOG_INFO;
+		$CPAN::Config->{colorize_warn}  = LOG_WARNING;
+		$CPAN::Config->{colorize_debug} = LOG_DEBUG;
+	}
+
+	# apparently we reload the config from disk sometimes,
+	# overriding the values we actually want for these,
+	# so put them back.
+	{
+		my $_try_loading = \&CPAN::HandleConfig::_try_loading;
+		no warnings 'redefine';
+		*CPAN::HandleConfig::_try_loading = sub {
+			my $ret = $_try_loading->(@_);
+			set_syslog_colorize();
+			return $ret;
+		};
+		use warnings 'redefine';
+	}
+
+	# We want to duplicate messages to syslog
+	# we overrode the "colorize" above to be syslog levels
+	# so now we turn of colorizing and send to syslog.
+	package My::CPAN::Shell {
+		$INC{'My/CPAN/Shell.pm'} = 1;
+		our $VERSION = v999.0.0_0;
+		use parent 'CPAN::Shell';
+
+		sub colorize_output { 0 }
+
+		sub print_ornamented {
+			my ($self, $what, $level) = @_;
+			Sys::Syslog::syslog($level, $what);
+			$self->SUPER::print_ornamented($what);
+		}
+	}
+
+	# We want to set the proc title, not the term title
+	package Term::Title {
+		$INC{'Term/Title.pm'} = 1;
+		our $VERSION = v999.0.0_0;
+		sub set_titlebar {
+			my ($msg) = @_;
+			$msg =~ s/^Smoking\s+//;
+			$0 = "$name: $msg";
+		}
+	}
+}
+
+use CPAN::Reporter::Smoker qw< start >;
+
+$CPAN::Frontend = 'My::CPAN::Shell';
+set_syslog_colorize;
+
+openlog($name, 'pid', LOG_LOCAL1);
+END { closelog() }
+
+# Set up local::lib install path
+my $local_lib_root = "$ENV{HOME}/perl5";
+$ENV{PERL_LOCAL_LIB_ROOT} = $local_lib_root;
+
+push @INC, "$local_lib_root/lib/perl5";
+$ENV{PATH}        = "$local_lib_root/bin:$ENV{PATH}";
+$ENV{PERL_MB_OPT} = "--install_base '$local_lib_root'";
+$ENV{PERL_MM_OPT} = "INSTALL_BASE=$local_lib_root";
+
+$0 = $name;
+start( install => 1 );

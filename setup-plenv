@@ -1,5 +1,5 @@
 
-# doas perl -ani -E '$F[3] .= ",softdep,noatime" if $F[1] =~ m{/home|/minicpan|/tmp}; say "@F"' /etc/fstab 
+# doas perl -ani -E '$F[3] .= ",softdep,noatime" if $F[1] =~ m{/home|/minicpan|/tmp}; say "@F"' /etc/fstab
 
 # TODO:
 # * Install plenv "system-wide" instead of per-user
@@ -24,9 +24,35 @@ for f in \
     chmod +x ~/.$f
 done
 
-# TODO: add the actual smoker required modules
 cat <<EOL >~/.plenv/extra-modules
-Carton
+CPAN
+
+# Install toolchain modules
+ExtUtils::CBuilder
+Module::Build
+Module::Build
+Archive::Tar
+YAML
+YAML::XS
+Test::Pod
+Test::Pod::Coverage
+Digest::SHA
+version
+
+# Install Task::CPAN::Reporter and CPAN::Reporter::Smoker
+
+Task::CPAN::Reporter
+CPAN::Reporter::Smoker
+
+# Install some extra stuff
+Module::Signature
+Log::Log4perl
+HTTP::Date
+local::lib
+LWP::Protocol::https
+HTTP::Tiny
+CPAN::SQLite
+Term::Title
 EOL
 
 PATH="$HOME/.plenv/bin:$PATH"

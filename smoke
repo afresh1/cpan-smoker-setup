@@ -71,10 +71,11 @@ my $local_lib_root = "$ENV{HOME}/perl/";
 $local_lib_root .= ( $ENV{PLENV_VERSION} || 'system' );
 $ENV{PERL_LOCAL_LIB_ROOT} = $local_lib_root;
 
-push @INC, "$local_lib_root/lib/perl5";
 $ENV{PATH}        = "$local_lib_root/bin:$ENV{PATH}";
 $ENV{PERL_MB_OPT} = "--install_base '$local_lib_root'";
 $ENV{PERL_MM_OPT} = "INSTALL_BASE=$local_lib_root";
+$ENV{PERL5LIB}    = "$local_lib_root/lib/perl5"
+                    . ( $ENV{PERL5LIB} ? ":$ENV{PERL5LIB}" : "" );
 
 $0 = $name;
 start( install => 1 );

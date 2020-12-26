@@ -67,7 +67,8 @@ openlog($name, 'pid', LOG_LOCAL1);
 END { closelog() }
 
 # Set up local::lib install path
-my $local_lib_root = "$ENV{HOME}/perl5";
+my $local_lib_root = "$ENV{HOME}/perl/";
+$local_lib_root .= ( $ENV{PLENV_VERSION} || 'system' );
 $ENV{PERL_LOCAL_LIB_ROOT} = $local_lib_root;
 
 push @INC, "$local_lib_root/lib/perl5";

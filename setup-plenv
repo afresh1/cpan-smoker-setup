@@ -79,12 +79,14 @@ oldest=$( plenv versions --bare | grep -x '5\.[0-9][0-9]' | tail -3 | head -1 )
 plenv install-latest -o $oldest -s -threaded -- -Dusethreaded
 
 # Now we remove threaded versions that are older than we want
-tempfile=$( mktemp threaded-perls-XXXXXXXX )
-plenv versions --bare | grep -e '-threaded$' | tail -3 > $tempfile
-for v in plenv versions | grep -v -x -F -f $tempfile; do
-	rm -rf "$(plenv root)/versions/$v"
+threaded=$( plenv versions --bare | grep -e '-threaded$' )
+oldest=$( echo "$threaded" | tail -3 | head -1 )
+set --
+for v in $threaded; do
+	[ "$v" = "$oldest" ] && break
+	set -- "$@" "$( plenv prefix "$v" )"
 done
-rm -f $tempfile
+[ "$*" ] && rm -rf "$@"
 
 cat <<'EOL' >> ~/.profile
 PATH="$HOME/.plenv/bin:$PATH"

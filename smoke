@@ -3,8 +3,8 @@ use strict;
 
 use Sys::Syslog qw< :standard :macros >;;
 
-my $name = "Smoke CPAN on $^V";
-$name .= " ($ENV{PLENV_VERSION})" if $ENV{PLENV_VERSION};
+$ENV{PLENV_VERSION} ||= 'system';
+my $name = "Smoke CPAN on $^V ($ENV{PLENV_VERSION})";
 
 BEGIN {
 	use CPAN::HandleConfig;
@@ -67,8 +67,7 @@ openlog($name, 'pid', LOG_LOCAL1);
 END { closelog() }
 
 # Set up local::lib install path
-my $local_lib_root = "$ENV{HOME}/perl/";
-$local_lib_root .= ( $ENV{PLENV_VERSION} || 'system' );
+my $local_lib_root = "$ENV{HOME}/perl/$ENV{PLENV_VERSION}";
 $ENV{PERL_LOCAL_LIB_ROOT} = $local_lib_root;
 
 $ENV{PATH}        = "$local_lib_root/bin:$ENV{PATH}";

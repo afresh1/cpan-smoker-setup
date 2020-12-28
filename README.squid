@@ -1,5 +1,14 @@
 doas pkg_add squid
 
+# Enable unwind:
+rcctl enable unwind
+rcctl start unwind
+
+# If using dhcp, enable using unwind in /etc/dhclient.conf with:
+# (as specified in unwind(8))
+supersede domain-name-servers 127.0.0.1;
+
+
 ## This means you can this to the smoker's .profile
 export no_proxy=localhost,127.0.0.1
 export http_proxy=http://localhost:3128

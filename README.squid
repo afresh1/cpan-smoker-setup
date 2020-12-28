@@ -1,6 +1,17 @@
 doas pkg_add squid
 
-Add to /etc/suid/squid.conf (and remove other allowed nets as appropriate)
+## This means you can this to the smoker's .profile
+export no_proxy=localhost,127.0.0.1
+export http_proxy=http://localhost:3128
+export https_proxy=http://localhost:3128
+
+
+## and this to /etc/pf.conf
+# Smoker needs to go through the proxy
+block return out log proto {tcp udp} user smoker
+
+
+## Add to /etc/suid/squid.conf (and remove other allowed nets as appropriate)
 acl localnet src 127.0.0.1              # localhost
 
 # Deny CONNECT to other than secure SSL ports

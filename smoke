@@ -54,12 +54,14 @@ BEGIN {
 			my ($msg) = @_;
 			$msg =~ s/^Smoking\s+//;
 			$0 = "$name: $msg";
+			print "\033]2;$name: $msg\007";
 		}
 	}
 }
 
 use CPAN::Reporter::Smoker qw< start >;
 
+Term::Title::set_titlebar("Starting");
 $CPAN::Frontend = 'My::CPAN::Shell';
 set_syslog_colorize;
 

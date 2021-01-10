@@ -1,6 +1,9 @@
 #!/usr/bin/env perl
 use strict;
+use warnings;
 
+use File::Copy  qw< copy >;
+use File::Path  qw< make_path >;
 use Sys::Syslog qw< :standard :macros >;;
 
 $ENV{PLENV_VERSION} ||= 'system';
@@ -64,6 +67,34 @@ use CPAN::Reporter::Smoker qw< start >;
 Term::Title::set_titlebar("Starting");
 $CPAN::Frontend = 'My::CPAN::Shell';
 set_syslog_colorize;
+
+# o   "PERL_CPAN_REPORTER_DIR" -- if set, this directory is used in place
+#     of the default ".cpanreporter" directory; this will affect not only
+#     the location of the default "config.ini", but also the location of
+#     the CPAN::Reporter::History database and any other files that live in
+#     that directory
+#
+# o   "PERL_CPAN_REPORTER_CONFIG" -- if set, this file is used in place of
+#     the default "config.ini" file; it may be in any directory, regardless
+#     of the choice of configuration directory
+
+my $reporter_root = $ENV{PERL_CPAN_REPORTER_DIR} || "$ENV{HOME}/.cpanreporter";
+my $reporter_dir  = $ENV{PERL_CPAN_REPORTER_DIR}
+                  = "$reporter_root/$ENV{PLENV_VERSION}";
+
+make_path($reporter_dir) unless -d $reporter_dir;
+
+$ENV{PERL_CPAN_REPORTER_CONFIG} = "$reporter_root/config.ini";
+
+if ( -e "$reporter_root/metabase_id.json" ) {
+	my $root_mtime = ( stat _ )[9];
+	my $dir_mtime  = ( stat "$reporter_dir/metabase_id.json" )[9] || 0;
+	if ($root_mtime > $dir_mtime) {
+		copy "$reporter_root/metabase_id.json",
+		     "$reporter_dir/metabase_id.json"
+		     or die "Unable to copy metabase_id.json: $!";
+	}
+}
 
 openlog($name, 'pid', LOG_LOCAL1);
 END { closelog() }

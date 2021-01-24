@@ -1,0 +1,8 @@
+#!/bin/sh
+tmux list-windows -t 0 -F '#{window_activity} #D #T' | while read activity pane_id title; do
+	inactive=$(( $( date +%s ) - activity ))
+	printf "%6d %s\n" $inactive "$title"
+	#if [ "$title" != "${title#Smoke CPAN }" -a $inactive -gt 3600 ]; then
+	#	tmux send-keys -t ${pane_id} C-c
+	#fi
+done

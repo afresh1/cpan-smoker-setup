@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+set -x
+
+list_windows=$( dirname $0 )/list-windows
+
+tmux has-session 2>/dev/null || \
+    tmux new-session -d 'tail -f /var/log/cpan_smoke' \
+      \; rename-window monitor \
+      \; split-window -v sh -c "while true; do clear; $list_windows; sleep 5; done" \
+      \; split-window -v systat vmstat \
+      \; split-window -h top \
+      \; select-pane  -t 0 \
+      \; resize-pane  -t 0.0 -y 40%
+
+#tmux set-hook window-pane-changed 'run-shell "tmux resize-pane -t 0.1 -y $(( $( tmux list-windows | wc -l ) + 1 ))"'
+# tmux new-window -n $PLENV_VERSION
+
+#     0 Smoke CPAN on v5.32.1 (system): Starting
+
+v=system
+$list_windows | grep -q "Smoke CPAN .*$v" || \
+    tmux new-window -n "Smoke CPAN $v" \
+        -c /home/smoker doas -u smoker sh -l -c 'exec /home/afresh1/cpan-smoker-setup/smoke'
+
+[ -t 0 ] && tmux select-window -t 0 \; attach

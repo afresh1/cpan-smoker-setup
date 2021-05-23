@@ -78,6 +78,7 @@ set_syslog_colorize;
 #     the default "config.ini" file; it may be in any directory, regardless
 #     of the choice of configuration directory
 
+# This we leave in the real HOME since from time-to-time I may rm the other
 my $reporter_root = $ENV{PERL_CPAN_REPORTER_DIR} || "$ENV{HOME}/.cpanreporter";
 my $reporter_dir  = $ENV{PERL_CPAN_REPORTER_DIR}
                   = "$reporter_root/$ENV{PLENV_VERSION}";
@@ -99,8 +100,16 @@ if ( -e "$reporter_root/metabase_id.json" ) {
 openlog($name, 'pid', LOG_LOCAL1);
 END { closelog() }
 
-# Set up local::lib install path
-my $local_lib_root = "$ENV{HOME}/perl/$ENV{PLENV_VERSION}";
+# Override HOME to be version specific for cpanm and such
+$ENV{HOME} = "$ENV{HOME}/smoke/$ENV{PLENV_VERSION}";
+make_path($ENV{HOME}) unless -d $ENV{HOME};
+
+# May need to have version specific TMPDIRs, maybe.
+#$ENV{TMPDIR} = "/tmp/$ENV{PLENV_VERSION}";
+#make_path($ENV{TMPDIR});
+
+# Set up local::lib install path inside temporary HOME
+my $local_lib_root = "$ENV{HOME}/local";
 $ENV{PERL_LOCAL_LIB_ROOT} = $local_lib_root;
 
 $ENV{PATH}        = "$local_lib_root/bin:$ENV{PATH}";
